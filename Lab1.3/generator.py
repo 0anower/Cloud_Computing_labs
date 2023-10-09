@@ -11,12 +11,11 @@ data = json.dumps(dict1)
 print(data)
 
 
-
-# write data on file
+# create and write data on data.json
 with open('data.json', 'w') as json_data:
     json_data.write(data)
 
-with open('data.json', 'r') as data_json_file:
-    d = json.load(data_json_file)
 
-    print("data.json file: ", d)
+# store data.json file in the /var/www/html folder
+with open('/var/www/html/data.json', 'w') as server_file:
+   json.dump(dict1, server_file)
