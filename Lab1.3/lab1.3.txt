@@ -1,0 +1,89 @@
+TASK1
+
+oanowe01@instance-1:~$ ls
+oanowe01@instance-1:~$ su - oboni
+Password: 
+(base) oboni@instance-1:~$ ls
+Miniconda3-latest-Linux-x86_64.sh  data.json  miniconda3  wget-log
+(base) oboni@instance-1:~$ nano generator.py
+(base) oboni@instance-1:~$ ls
+Miniconda3-latest-Linux-x86_64.sh  data.json  generator.py  miniconda3  wget-log
+(base) oboni@instance-1:~$ nano generator.py
+(base) oboni@instance-1:~$ cat generator.py
+import random
+import json
+
+dict1 = {}
+for n in range(10):
+    key = 'server' + str(n)
+    value = random.randint(1, 100)
+    dict1[key] = value
+
+data = json.dumps(dict1)
+print(data)
+
+# write data on file
+with open('data.json', 'w') as json_data:
+    json_data.write(data)
+
+print("data.json created")
+(base) oboni@instance-1:~$ python generator.py
+{"server0": 4, "server1": 15, "server2": 36, "server3": 10, "server4": 28, "server5": 87, "server6": 42, "server7": 62, "server8": 74, "server9": 78}
+data.json created
+(base) oboni@instance-1:~$ cat data.json
+{"server0": 4, "server1": 15, "server2": 36, "server3": 10, "server4": 28, "server5": 87, "server6": 42, "server7": 62, "server8": 74, "server9": 78}(base) 
+       oboni@instance-1:~$ sudo cp data.json /var/www/html/
+[sudo] password for oboni: 
+(base) oboni@instance-1:~$
+
+
+
+TASK 2
+
+oanowe01@instance-1:~$ su - oboni
+Password: 
+(base) oboni@instance-1:~$ nano generator.py
+(base) oboni@instance-1:~$ cat generator.py
+import random
+import json
+
+dict1 = {}
+for n in range(10):
+    key = 'server' + str(n)
+    value = random.randint(1, 100)
+    dict1[key] = value
+
+data = json.dumps(dict1)
+print(data)
+
+# write data on file
+with open('data.json', 'w') as json_data:
+    json_data.write(data)
+
+print("data.json created")
+
+
+(base) oboni@instance-1:~$ python generator.py
+{"server0": 92, "server1": 64, "server2": 88, "server3": 70, "server4": 78, "server5": 82, "server6": 95, "server7": 28, "server8": 79, "server9": 10}
+data.json created
+(base) oboni@instance-1:~$ cat data.json
+{"server0": 92, "server1": 64, "server2": 88, "server3": 70, "server4": 78, "server5": 82, "server6": 95, "server7": 28, "server8": 79, "server9": 10}(base) 
+       oboni@instance-1:~$ sudo cp data.json /var/www/html/
+[sudo] password for oboni: 
+(base) oboni@instance-1:~$ nano collector.py
+(base) oboni@instance-1:~$ python3 collector.py http://35.202.49.34/data.json
+collector.py
+http://35.202.49.34/data.json
+server0 92
+server1 64
+server2 88
+server3 70
+server4 78
+server5 82
+server6 95
+server7 28
+server8 79
+server9 10
+{'under': 2, 'over': 8}
+(base) oboni@instance-1:~$ 
+ 
